@@ -48,8 +48,14 @@ on e.from_date = m.from_date;
 select e.from_date, m.from_date
 from dept_emp as e
 join dept_manager as m
-on e.from_date = m.from_date
+on e.from_date = m.from_date;
 
+-- 문제 dept_emp 테이블과 dept_manager테이블에서 dept_no 속성값 d001를 가진 데이터를 출력
+select m.dept_no, m.to_date, e.dept_no, e.to_date
+from dept_manager as m
+left join dept_emp as e
+on m.dept_no = e.dept_no
+where m.dept_no = "d001" and e.dept_no = "d001";
 
 
 
