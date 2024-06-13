@@ -120,6 +120,8 @@ on p.category_id = c.category_id
 where c.category_id =
 		(select category_id from tb_categories where category_name = '슬랙스' and parent_id = 5);
 
+-- ----------------- 맨 밑에 답지 있음  -----------------------------------------------------------
+
 -- 특정 색상의 상품이 있는 모든 카테고리 조회 (서브쿼리 사용할 필요 없음)
 -- 예를 들어, '흰색' 상품이 있는 모든 카테고리를 조회하는 쿼리입니다.
 
@@ -132,7 +134,7 @@ from tb_products as p
 join tb_categories as c
 on p.category_id = c.category_id;
 
-select p.product_name, p.price, p.color, c.category_name, c.parent_id
+select p.product_name, p.price, p.color, c.category_name, c.parent_id, c.category_name
 from tb_products as p
 join tb_categories as c
 on p.category_id = c.category_id
@@ -156,12 +158,34 @@ join tb_categories as c
 on p.category_id = c.category_id;
 
 
+-- -------------답지 --------------------------
 
+use demo3;
 
+select *
+from tb_products;
 
+select *
+from tb_categories;
 
+-- 특정 색상의 상품이 있는 모든 카테고리 조회 (서브쿼리 사용할 필요 없음) ----- 풀이 -----
+-- 예를 들어, '흰색' 상품이 있는 모든 카테고리를 조회하는 쿼리입니다.
 
+-- 1단계
+-- 결과집합에서 중복 제거할때 distinct 
+select distinct c.category_name
+from tb_products as p
+join tb_categories as c
+on p.category_id = c.category_id
+where p.color = '샤인';
 
-                                                
-                                                
+-- 가장 비싼 상품을 가진 카테고리 찾기 (서브쿼리 사용할 필요 없음) --- 풀이 ---
+-- 각 카테고리 중 가장 비싼 상품을 가지고 있는 카테고리와 그 상품의 정보를 조회하는 쿼리입니다
 
+select *, max(p.price) as max_price
+from tb_products p
+join tb_categories c
+on p.category_id = c.category_id
+group by c.category_name
+order by max_price desc
+limit 2;

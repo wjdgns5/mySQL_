@@ -42,15 +42,40 @@ having (Population < 10000000)
 order by Population desc
 limit  30;
 
--- city에서 Population이 3000000 이상인 경우 '인구많음'을 표시하고 2000000 이상인 경우 '인구보통'을 표시 그 이하는 '인구적음'을 출력해라
+-- city에서 Population이 3000000 이상인 경우 '인구많음'으로 표시하고 2000000 이상인 경우 '인구보통'으로 표시 그 이하는 '인구적음'으로 출력해라
+-- world db 사용
+use world;
 
-select distinct *, case
-when Population >= 3000000 then '인구많음'
-when Population >= 2000000 then '인구보통'
-else '인구적음'
+select *, case
+when Population >= 3000000 then '많음'
+when Population >= 2000000 then '보통'
+else '적음'
 end as '인구통계'
 from city
 group by District
 having CountryCode = 'KOR'
 order by Population desc;
+
+-- 문제풀기
+
+-- 1조
+-- 문제 1
+-- 가장 인원이 많은 부서의 매니저 이름을 출력하세요. db = employees
+-- (정답 = first_name : Leon , last_name : DasSarma)
+-- (퇴사한 매니저는 제외 && 퇴사 직원 제외)
+-- (서브쿼리를 사용 안해도 가능)
+
+use employees;
+
+select *
+from dept_emp;
+
+
+
+
+
+
+
+
+
 
