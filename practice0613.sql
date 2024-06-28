@@ -22,3 +22,14 @@ from `country` as c
 join `countrylanguage` as l 
 on c.Code = l.CountryCode
 where c.code in (select Code from country where Code = 'KOR') && l.IsOfficial in (select IsOfficial from countrylanguage where IsOfficial = 'T');
+
+-- 독립 이력이 없는 나라 코드와 언어를 찾고 30개를 출력하라 
+-- country 와 countrylanguage 테이블 사용
+select distinct l.CountryCode, c.IndepYear,  l.Language
+from country as c
+left join countrylanguage as l
+on c.Code = l.CountryCode
+where c.IndepYear is null
+limit 30;
+
+

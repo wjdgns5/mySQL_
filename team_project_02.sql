@@ -433,6 +433,15 @@ where restaurant_id = 101;
  select * from restaurant
  where category_id = 7;
  
+ -- ---------------------------------
+ use temp;
+ 
+ select *
+ from location;
+ 
+ 
+
+
  
 
 
